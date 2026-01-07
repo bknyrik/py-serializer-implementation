@@ -6,21 +6,24 @@ from car.models import Car
 
 class CarSerializer(serializers.Serializer):
 
-    MIN_HORSE_POWERS = 60
-    MAX_HORSE_POWERS = 120
+    MIN_HORSE_POWERS = 1
+    MAX_HORSE_POWERS = 1914
 
-    manufacturer = serializers.CharField(max_length=64)
-    model = serializers.CharField(max_length=64)
+    id = serializers.IntegerField(read_only=True)
+    manufacturer = serializers.CharField(max_length=64, required=True)
+    model = serializers.CharField(max_length=64, required=True)
     horse_powers = serializers.IntegerField(
         validators=[
             MinValueValidator(MIN_HORSE_POWERS),
             MaxValueValidator(MAX_HORSE_POWERS)
-        ]
+        ],
+        required=True
     )
     is_broken = serializers.BooleanField()
     problem_description = serializers.CharField(
         max_length=255,
-        allow_null=True
+        allow_null=True,
+        required=False
     )
 
     def create(self, validated_data: dict) -> Car:
