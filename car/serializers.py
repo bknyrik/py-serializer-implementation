@@ -6,8 +6,8 @@ from car.models import Car
 
 class CarSerializer(serializers.Serializer):
 
-    MIN_HORSE_POWERS = 0
-    MAX_HORSE_POWERS = 100
+    MIN_HORSE_POWERS = 60
+    MAX_HORSE_POWERS = 120
 
     manufacturer = serializers.CharField(max_length=64)
     model = serializers.CharField(max_length=64)
